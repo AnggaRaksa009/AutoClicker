@@ -41,6 +41,20 @@ def on_key_press(event):
         # Tambahkan titik klik saat tombol "0" ditekan
         click_points.append(get_cursor_position())
         print("Titik klik baru ditambahkan.")
+        
+    if event.name == '-':
+        # Hapus titik klik saat tombol "-" ditekan
+        if len(click_points) > 0:            # Hapus titik klik yang pertama dari daftar titik klik
+            click_points.pop(0)
+            # Jika indeks titik saat ini berada di titik yang dihapus,
+            # atur indeks ke titik berikutnya (jika ada)
+            if current_point_index == 0:
+                current_point_index += 1
+                if current_point_index >= len(click_points):
+                    current_point_index = 0
+            print("Titik klik pertama dihapus.")
+        else:
+            print("Tidak ada titik klik yang tersedia untuk dihapus.")
 
 # Mendaftarkan fungsi sebagai penangan acara saat tombol ditekan
 keyboard.on_press(on_key_press)
@@ -81,7 +95,7 @@ while is_auto_clicking:
         if current_point_index >= len(click_points):
             current_point_index = 0
 
-    # Jeda antara klik
+    # Jeda antara klikx
     time.sleep(0)
 
     # Cek apakah tombol "delete" ditekan untuk menghentikan auto clicker
